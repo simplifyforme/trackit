@@ -1,0 +1,31 @@
+# Dev profile — activated with: mvn spring-boot:run -Dspring-boot.run.profiles=dev
+# Requires: docker-compose up -d  (starts PostgreSQL + MailHog)
+
+app:
+  # Expo web dev server port — links in emails will open directly in the browser
+  frontend-base-url: http://localhost:8081
+
+spring:
+  mail:
+    # MailHog SMTP — no auth, no TLS
+    host: localhost
+    port: 1025
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+            required: false
+
+  jpa:
+    show-sql: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example.template: DEBUG
+    org.springframework.security: DEBUG
+    org.flywaydb: DEBUG

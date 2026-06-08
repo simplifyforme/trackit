@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: template-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/templatedb}
+    username: ${DB_USERNAME:template}
+    password: ${DB_PASSWORD:template}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate          # Flyway owns the schema; Hibernate only validates
+    open-in-view: false           # Avoids lazy-load surprises and connection leaks
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+app:
+  jwt:
+    # Plain-text secret — must be at least 32 characters.
+    # Override with a strong random value in production (e.g. openssl rand -base64 48).
+    secret: ${JWT_SECRET:change-me-to-a-very-long-secret-key-at-least-32-chars!!}
+    access-token-expiry-ms: ${JWT_ACCESS_TOKEN_EXPIRY_MS:900000}       # 15 minutes
+    refresh-token-expiry-ms: ${JWT_REFRESH_TOKEN_EXPIRY_MS:604800000}  # 7 days
+
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:3000}
+
+  # AES-256 key for encrypting secrets at rest (OpenRouter API key, Gmail tokens).
+  # Generate with: openssl rand -base64 32
+  # Must decode to exactly 32 bytes. If blank, a transient in-memory key is used (dev only).
+  encryption:
+    key: ${SETTINGS_ENCRYPTION_KEY:}
+
+  # OpenRouter AI integration
+  openrouter:
+    api-key: ${OPENROUTER_API_KEY:}
+    default-model: ${OPENROUTER_DEFAULT_MODEL:openrouter/auto}
+    base-url: https://openrouter.ai/api/v1
+
+  # Gmail OAuth2 integration (read-only, separate from app login)
+  gmail:
+    client-id: ${GMAIL_CLIENT_ID:}
+    client-secret: ${GMAIL_CLIENT_SECRET:}
+    redirect-uri: ${GMAIL_REDIRECT_URI:http://localhost:8080/api/gmail/callback}
+    poll-interval-ms: ${GMAIL_POLL_INTERVAL_MS:300000}
+
+  email:
+    from: ${MAIL_FROM:noreply@example.com}
+    verification-token-expiry-ms: ${EMAIL_VERIFICATION_EXPIRY_MS:86400000}   # 24 hours
+    password-reset-token-expiry-ms: ${PASSWORD_RESET_EXPIRY_MS:3600000}      # 1 hour
+
+server:
+  port: ${PORT:8080}
+  error:
+    # Suppress Spring's default /error HTML page — GlobalExceptionHandler returns JSON instead
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+
+logging:
+  level:
+    root: INFO

@@ -1,0 +1,28 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: template-postgres
+    environment:
+      POSTGRES_DB: templatedb
+      POSTGRES_USER: template
+      POSTGRES_PASSWORD: template
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U template -d templatedb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: template-mailhog
+    ports:
+      - "1025:1025"   # SMTP — matches application-dev.yml
+      - "8721:8025"   # Web UI  →  http://localhost:8721  (7721-8720 reserved by Hyper-V on this machine)
+
+volumes:
+  postgres_data:
