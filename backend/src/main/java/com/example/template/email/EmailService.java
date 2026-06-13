@@ -1,21 +1,18 @@
 package com.example.template.email;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-import lombok.RequiredArgsConstructor;
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    private final Resend resend;
 
     @Value("${app.email.from}")
     private String fromAddress;
@@ -23,11 +20,10 @@ public class EmailService {
     @Value("${app.frontend-base-url}")
     private String frontendBaseUrl;
 
-    /**
-     * Sends confirmation email asynchronously so the register endpoint returns immediately.
-     * Note: @Async runs after the calling method returns, which in practice means the DB
-     * transaction has already committed — the token is safe to use when the user clicks the link.
-     */
+    public EmailService(@Value("${app.resend.api-key}") String apiKey) {
+        this.resend = new Resend(apiKey);
+    }
+
     @Async
     public void sendVerificationEmail(String to, String token) {
         String link = frontendBaseUrl + "/confirm?token=" + token;
@@ -58,15 +54,15 @@ public class EmailService {
 
     private void send(String to, String subject, String html) {
         try {
-            MimeMessage msg = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(msg, true, "UTF-8");
-            helper.setFrom(fromAddress);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(html, true);
-            mailSender.send(msg);
+            CreateEmailOptions params = CreateEmailOptions.builder()
+                    .from(fromAddress)
+                    .to(to)
+                    .subject(subject)
+                    .html(html)
+                    .build();
+            resend.emails().send(params);
             log.debug("Sent '{}' to {}", subject, to);
-        } catch (MessagingException e) {
+        } catch (ResendException e) {
             log.error("Failed to send email to {}: {}", to, e.getMessage());
         }
     }

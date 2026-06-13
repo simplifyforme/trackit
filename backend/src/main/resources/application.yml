@@ -25,8 +25,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: ${MAIL_USERNAME:disabled}
+    password: ${MAIL_PASSWORD:disabled}
     properties:
       mail:
         smtp:
@@ -36,6 +36,9 @@ spring:
             required: true
 
 app:
+  resend:
+    api-key: ${RESEND_API_KEY:}
+
   jwt:
     # Plain-text secret — must be at least 32 characters.
     # Override with a strong random value in production (e.g. openssl rand -base64 48).
