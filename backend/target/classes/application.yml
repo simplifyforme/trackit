@@ -23,10 +23,10 @@ spring:
     locations: classpath:db/migration
 
   mail:
-    host: ${MAIL_HOST:smtp.gmail.com}
-    port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:}
-    password: ${MAIL_PASSWORD:}
+    host: smtp.gmail.com
+    port: 587
+    username: simplifyformecontact@gmail.com
+    password: xpegzmaxufyvrhsw
     properties:
       mail:
         smtp:
@@ -65,7 +65,7 @@ app:
     poll-interval-ms: ${GMAIL_POLL_INTERVAL_MS:300000}
 
   email:
-    from: ${MAIL_FROM:noreply@example.com}
+    from: ${MAIL_FROM:simplifyformecontact@gmail.com}
     verification-token-expiry-ms: ${EMAIL_VERIFICATION_EXPIRY_MS:86400000}   # 24 hours
     password-reset-token-expiry-ms: ${PASSWORD_RESET_EXPIRY_MS:3600000}      # 1 hour
 

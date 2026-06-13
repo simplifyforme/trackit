@@ -79,3 +79,13 @@ E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\templat
 E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\user\repository\RoleRepository.java
 E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\user\repository\UserRepository.java
 E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\user\service\UserService.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\controller\WishlistController.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\dto\CreateWishlistItemRequest.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\dto\UpdateWishlistItemRequest.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\dto\WishlistItemResponse.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\entity\WishlistItem.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\entity\WishlistPriority.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\mapper\WishlistItemMapper.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\repository\WishlistItemRepository.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\service\ProductImageScraperService.java
+E:\Projects\Trackit\sourcecode\trackit\backend\src\main\java\com\example\template\wishlist\service\WishlistService.java

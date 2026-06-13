@@ -174,3 +174,34 @@ export interface GmailStatusResponse {
 export interface GmailConnectResponse {
   authorizationUrl: string;
 }
+
+// ─── Wishlist ─────────────────────────────────────────────────────────────────
+
+export type WishlistPriority = 'LOW' | 'MEDIUM' | 'HIGH';
+
+export interface WishlistItemResponse {
+  id: string;
+  name: string;
+  productUrl: string;
+  imageUrl: string | null;
+  notes: string | null;
+  priority: WishlistPriority;
+  isPurchased: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateWishlistItemRequest {
+  name: string;
+  productUrl: string;
+  notes?: string;
+  priority?: WishlistPriority;
+}
+
+export interface UpdateWishlistItemRequest {
+  name: string;
+  productUrl: string;
+  notes?: string;
+  priority?: WishlistPriority;
+  isPurchased?: boolean;
+}

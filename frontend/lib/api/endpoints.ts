@@ -4,6 +4,7 @@ import type {
   ChangePasswordRequest,
   CreateOrderRequest,
   CreateTodoRequest,
+  CreateWishlistItemRequest,
   GmailConnectResponse,
   GmailStatusResponse,
   LoginRequest,
@@ -19,7 +20,9 @@ import type {
   TodoResponse,
   UpdateOrderRequest,
   UpdateTodoRequest,
+  UpdateWishlistItemRequest,
   UserResponse,
+  WishlistItemResponse,
 } from '../../types/api';
 
 export const authApi = {
@@ -91,4 +94,14 @@ export const gmailApi = {
   status: () => api.get<GmailStatusResponse>('/api/gmail/status'),
   connect: () => api.post<GmailConnectResponse>('/api/gmail/connect'),
   disconnect: () => api.delete<MessageResponse>('/api/gmail/disconnect'),
+};
+
+export const wishlistApi = {
+  list: () => api.get<WishlistItemResponse[]>('/api/wishlist'),
+  get: (id: string) => api.get<WishlistItemResponse>(`/api/wishlist/${id}`),
+  create: (data: CreateWishlistItemRequest) => api.post<WishlistItemResponse>('/api/wishlist', data),
+  update: (id: string, data: UpdateWishlistItemRequest) =>
+    api.put<WishlistItemResponse>(`/api/wishlist/${id}`, data),
+  delete: (id: string) => api.delete<void>(`/api/wishlist/${id}`),
+  refreshImage: (id: string) => api.post<WishlistItemResponse>(`/api/wishlist/${id}/refresh-image`, {}),
 };

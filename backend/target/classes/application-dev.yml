@@ -6,18 +6,6 @@ app:
   frontend-base-url: http://localhost:8081
 
 spring:
-  mail:
-    # MailHog SMTP — no auth, no TLS
-    host: localhost
-    port: 1025
-    properties:
-      mail:
-        smtp:
-          auth: false
-          starttls:
-            enable: false
-            required: false
-
   jpa:
     show-sql: true
 
