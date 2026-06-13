@@ -3,7 +3,7 @@ spring:
     name: template-backend
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/templatedb}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/trackitdb}
     username: ${DB_USERNAME:template}
     password: ${DB_PASSWORD:template}
     driver-class-name: org.postgresql.Driver
@@ -25,8 +25,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: simplifyformecontact@gmail.com
-    password: xpegzmaxufyvrhsw
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -43,7 +43,7 @@ app:
     access-token-expiry-ms: ${JWT_ACCESS_TOKEN_EXPIRY_MS:900000}       # 15 minutes
     refresh-token-expiry-ms: ${JWT_REFRESH_TOKEN_EXPIRY_MS:604800000}  # 7 days
 
-  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:3000}
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:8081}
 
   # AES-256 key for encrypting secrets at rest (OpenRouter API key, Gmail tokens).
   # Generate with: openssl rand -base64 32

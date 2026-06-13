@@ -4,7 +4,7 @@ services:
     image: postgres:16-alpine
     container_name: template-postgres
     environment:
-      POSTGRES_DB: templatedb
+      POSTGRES_DB: trackitdb
       POSTGRES_USER: template
       POSTGRES_PASSWORD: template
     ports:
@@ -12,7 +12,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U template -d templatedb"]
+      test: ["CMD-SHELL", "pg_isready -U template -d trackitdb"]
       interval: 10s
       timeout: 5s
       retries: 5

@@ -25,7 +25,7 @@ docker-compose up -d
 ```
 
 This starts:
-- **PostgreSQL** on `localhost:5432` (db=`templatedb`, user/pass=`template`)
+- **PostgreSQL** on `localhost:5432` (db=`trackitdb`, user/pass=`template`)
 - **MailHog** SMTP on `localhost:1025`, web UI on `http://localhost:8025`
 
 Flyway runs automatically on startup and applies V1–V3 migrations.
@@ -230,7 +230,7 @@ All errors return the same JSON structure:
 
 | Variable | Default | Notes |
 |---|---|---|
-| `DB_URL` | `jdbc:postgresql://localhost:5432/templatedb` | |
+| `DB_URL` | `jdbc:postgresql://localhost:5432/trackitdb` | |
 | `DB_USERNAME` | `template` | |
 | `DB_PASSWORD` | `template` | |
 | `JWT_SECRET` | `change-me-to-a-very-long-secret-key-at-least-32-chars!!` | **Change in production. Min 32 chars.** |
@@ -357,7 +357,7 @@ Flyway runs automatically on startup. New migrations are V4–V9 and are purely 
 
 ```bash
 # Confirm migrations ran
-docker-compose exec postgres psql -U template -d templatedb -c '\dt'
+docker-compose exec postgres psql -U template -d trackitdb -c '\dt'
 ```
 
 ### How to connect Gmail

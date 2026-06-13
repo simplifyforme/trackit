@@ -58,7 +58,7 @@ public class GmailService {
                 .queryParam("response_type", "code")
                 .queryParam("scope", "https://www.googleapis.com/auth/gmail.readonly")
                 .queryParam("access_type", "offline")
-                .queryParam("prompt", "consent")
+                .queryParam("prompt", "select_account consent")
                 .queryParam("state", state)
                 .toUriString();
     }

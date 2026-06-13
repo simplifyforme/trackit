@@ -1,0 +1,5 @@
+com\example\template\integrations\openrouter\EmailClassificationServiceTest.class
+com\example\template\TemplateApplicationTests.class
+com\example\template\order\OrderServiceTest.class
+com\example\template\integrations\gmail\EmailOrderProcessorTest.class
+com\example\template\todo\TodoServiceTest.class

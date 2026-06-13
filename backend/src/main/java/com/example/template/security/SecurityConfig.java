@@ -89,7 +89,7 @@ public class SecurityConfig {
         // Allow the configured frontend origin plus the Expo web dev server port.
         // In production replace FRONTEND_BASE_URL with your deployed domain.
         config.setAllowedOrigins(List.of(
-                frontendBaseUrl,       // e.g. http://localhost:3000
+                frontendBaseUrl,       // e.g. http://localhost:8081
                 "http://localhost:8081",  // expo web dev
                 "http://localhost:19006"  // expo web legacy port
         ));
