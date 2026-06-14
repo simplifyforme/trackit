@@ -1,7 +1,6 @@
 package com.example.template.email;
 
 import com.resend.Resend;
-import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,7 +61,7 @@ public class EmailService {
                     .build();
             resend.emails().send(params);
             log.debug("Sent '{}' to {}", subject, to);
-        } catch (ResendException e) {
+        } catch (Exception e) {
             log.error("Failed to send email to {}: {}", to, e.getMessage());
         }
     }
