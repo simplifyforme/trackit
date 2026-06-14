@@ -13,6 +13,7 @@
     "android": {
       "package": "com.example.templateapp",
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4F6EF7"
       }
     },
