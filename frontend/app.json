@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TemplateApp",
-    "slug": "template-app",
+    "name": "Trackit",
+    "slug": "trackit",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
