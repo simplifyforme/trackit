@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -32,6 +33,7 @@ export default function WishlistItemDetailScreen() {
   const [imageErrored, setImageErrored] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [refreshingImage, setRefreshingImage] = useState(false);
   const [error, setError] = useState('');
 
@@ -85,17 +87,50 @@ export default function WishlistItemDetailScreen() {
     }
   }
 
+  async function togglePurchased() {
+    const newValue = !isPurchased;
+    setIsPurchased(newValue);
+    const result = await wishlistApi.update(id, {
+      name: name.trim(),
+      productUrl: productUrl.trim(),
+      notes: notes.trim() || undefined,
+      priority,
+      isPurchased: newValue,
+    });
+    if (!result.ok) {
+      setIsPurchased(!newValue);
+      setError(result.error.message ?? 'Failed to update purchase status.');
+    }
+  }
+
+  function executeDelete() {
+    setDeleting(true);
+    wishlistApi
+      .delete(id)
+      .then((result) => {
+        if (result.ok) {
+          router.back();
+        } else {
+          setDeleting(false);
+          setError(result.error?.message ?? 'Failed to delete item.');
+        }
+      })
+      .catch((e: unknown) => {
+        setDeleting(false);
+        setError((e as Error)?.message ?? 'Unexpected error.');
+      });
+  }
+
   function confirmDelete() {
+    if (Platform.OS === 'web') {
+      if (window.confirm('Remove this item from your wishlist?')) {
+        executeDelete();
+      }
+      return;
+    }
     Alert.alert('Remove Item', 'Remove this item from your wishlist?', [
       { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Remove',
-        style: 'destructive',
-        onPress: async () => {
-          await wishlistApi.delete(id);
-          router.back();
-        },
-      },
+      { text: 'Remove', style: 'destructive', onPress: executeDelete },
     ]);
   }
 
@@ -180,14 +215,14 @@ export default function WishlistItemDetailScreen() {
 
         <Button
           label={isPurchased ? 'Mark as Not Purchased' : 'Mark as Purchased'}
-          onPress={() => setIsPurchased(!isPurchased)}
+          onPress={togglePurchased}
           variant="ghost"
         />
 
         {error ? <Text style={[styles.error, { color: colors.danger }]}>{error}</Text> : null}
 
         <Button label="Save Changes" onPress={handleSave} loading={saving} style={styles.submit} />
-        <Button label="Remove from Wishlist" onPress={confirmDelete} variant="ghost" style={styles.delete} />
+        <Button label="Remove from Wishlist" onPress={confirmDelete} loading={deleting} variant="ghost" style={styles.delete} />
       </ScrollView>
     </Screen>
   );
