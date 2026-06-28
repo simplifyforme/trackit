@@ -75,6 +75,8 @@ export default function HomeScreen() {
           <NavCard icon="checkmark-done-outline" label="To-Do" route="/(app)/todos" colors={colors} />
           <NavCard icon="bag-outline" label="Orders" route="/(app)/orders" colors={colors} />
           <NavCard icon="heart-outline" label="Wishlist" route="/(app)/wishlist" colors={colors} />
+          <NavCard icon="book-outline" label="Books" route="/(app)/books" colors={colors} />
+          <NavCard icon="newspaper-outline" label="Articles" route="/(app)/articles" colors={colors} />
           <NavCard icon="settings-outline" label="Settings" route="/(app)/settings" colors={colors} />
         </View>
       </View>

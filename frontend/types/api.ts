@@ -205,3 +205,93 @@ export interface UpdateWishlistItemRequest {
   priority?: WishlistPriority;
   isPurchased?: boolean;
 }
+
+// ─── Books ───────────────────────────────────────────────────────────────────
+
+export type BookStatus = 'TO_READ' | 'IN_PROGRESS' | 'READ';
+
+export interface BookResponse {
+  id: string;
+  title: string;
+  coverImageUrl: string | null;
+  sourceUrl: string | null;
+  status: BookStatus;
+  startDate: string | null;
+  endDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateBookRequest {
+  title?: string;
+  coverImageUrl?: string;
+  sourceUrl?: string;
+  status?: BookStatus;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface UpdateBookRequest {
+  title: string;
+  coverImageUrl?: string;
+  sourceUrl?: string;
+  status: BookStatus;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
+export interface UpdateBookStatusRequest {
+  status: BookStatus;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface BookMetadataResponse {
+  title: string | null;
+  coverImageUrl: string | null;
+}
+
+// ─── Articles ────────────────────────────────────────────────────────────────
+
+export type ArticleStatus = 'TO_READ' | 'IN_PROGRESS' | 'READ';
+
+export interface ArticleResponse {
+  id: string;
+  title: string;
+  coverImageUrl: string | null;
+  sourceUrl: string | null;
+  status: ArticleStatus;
+  startDate: string | null;
+  endDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateArticleRequest {
+  title?: string;
+  coverImageUrl?: string;
+  sourceUrl?: string;
+  status?: ArticleStatus;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface UpdateArticleRequest {
+  title: string;
+  coverImageUrl?: string;
+  sourceUrl?: string;
+  status: ArticleStatus;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
+export interface UpdateArticleStatusRequest {
+  status: ArticleStatus;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface ArticleMetadataResponse {
+  title: string | null;
+  coverImageUrl: string | null;
+}

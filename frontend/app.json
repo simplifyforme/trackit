@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Trackit",
-    "slug": "trackit",
+    "slug": "template-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -35,6 +35,7 @@
       "eas": {
         "projectId": "fdfe5e3f-948e-4a51-a030-5bb2a4ac25c5"
       }
-    }
+    },
+    "owner": "simplifyforme"
   }
 }

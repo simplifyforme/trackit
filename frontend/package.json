@@ -7,6 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "web:local": "cross-env EXPO_PUBLIC_API_URL=http://localhost:8080 expo start --web",
+    "web:hosted": "cross-env EXPO_PUBLIC_API_URL=https://trackit-wtpm.onrender.com expo start --web",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -32,6 +34,7 @@
     "@babel/core": "^7.25.0",
     "@types/react": "~19.1.10",
     "babel-preset-expo": "~54.0.10",
+    "cross-env": "^10.1.0",
     "typescript": "~5.9.2"
   },
   "private": true

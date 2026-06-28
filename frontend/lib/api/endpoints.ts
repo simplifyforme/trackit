@@ -1,7 +1,13 @@
 import { api } from './client';
 import type {
+  ArticleMetadataResponse,
+  ArticleResponse,
+  BookMetadataResponse,
+  BookResponse,
   ChangeOrderStatusRequest,
   ChangePasswordRequest,
+  CreateArticleRequest,
+  CreateBookRequest,
   CreateOrderRequest,
   CreateTodoRequest,
   CreateWishlistItemRequest,
@@ -18,6 +24,10 @@ import type {
   SettingsRequest,
   SettingsResponse,
   TodoResponse,
+  UpdateArticleRequest,
+  UpdateArticleStatusRequest,
+  UpdateBookRequest,
+  UpdateBookStatusRequest,
   UpdateOrderRequest,
   UpdateTodoRequest,
   UpdateWishlistItemRequest,
@@ -104,4 +114,30 @@ export const wishlistApi = {
     api.put<WishlistItemResponse>(`/api/wishlist/${id}`, data),
   delete: (id: string) => api.delete<void>(`/api/wishlist/${id}`),
   refreshImage: (id: string) => api.post<WishlistItemResponse>(`/api/wishlist/${id}/refresh-image`, {}),
+};
+
+export const bookApi = {
+  list: () => api.get<BookResponse[]>('/api/books'),
+  get: (id: string) => api.get<BookResponse>(`/api/books/${id}`),
+  create: (data: CreateBookRequest) => api.post<BookResponse>('/api/books', data),
+  update: (id: string, data: UpdateBookRequest) => api.put<BookResponse>(`/api/books/${id}`, data),
+  updateStatus: (id: string, data: UpdateBookStatusRequest) =>
+    api.put<BookResponse>(`/api/books/${id}/status`, data),
+  delete: (id: string) => api.delete<void>(`/api/books/${id}`),
+  refreshMetadata: (id: string) => api.post<BookResponse>(`/api/books/${id}/refresh-metadata`, {}),
+  fetchMetadataPreview: (url: string) =>
+    api.post<BookMetadataResponse>('/api/books/metadata-preview', { url }),
+};
+
+export const articleApi = {
+  list: () => api.get<ArticleResponse[]>('/api/articles'),
+  get: (id: string) => api.get<ArticleResponse>(`/api/articles/${id}`),
+  create: (data: CreateArticleRequest) => api.post<ArticleResponse>('/api/articles', data),
+  update: (id: string, data: UpdateArticleRequest) => api.put<ArticleResponse>(`/api/articles/${id}`, data),
+  updateStatus: (id: string, data: UpdateArticleStatusRequest) =>
+    api.put<ArticleResponse>(`/api/articles/${id}/status`, data),
+  delete: (id: string) => api.delete<void>(`/api/articles/${id}`),
+  refreshMetadata: (id: string) => api.post<ArticleResponse>(`/api/articles/${id}/refresh-metadata`, {}),
+  fetchMetadataPreview: (url: string) =>
+    api.post<ArticleMetadataResponse>('/api/articles/metadata-preview', { url }),
 };
